@@ -9,22 +9,10 @@ const createTodo = async (todo) => {
 };
 
 const updateTodo = async (id, description) => {
-  // const col = ''
-  // if (typeof data === 'boolean')
-  //     col = 'done'
-  // else
-  //     col = 'description'
-
   return await Todo.update({ description: description }, { where: { id: id } });
 };
 
 const updateDoneTodo = async (id, done) => {
-  // const col = ''
-  // if (typeof data === 'boolean')
-  //     col = 'done'
-  // else
-  //     col = 'description'
-
   return await Todo.update({ done: done }, { where: { id: id } });
 };
 
@@ -33,7 +21,7 @@ const deleteTodo = async (id) => {
 };
 
 const getTodoById = async (id) => {
-  return await Todo.find({ where: { id: id } });
+  return await Todo.findByPk(id);
 };
 
 module.exports = {

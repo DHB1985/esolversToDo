@@ -28,11 +28,8 @@ const updateTodo = async (req, res, next) => {
   try {
     const { data } = req.body;
     const { id } = req.params;
-    const response = "";
 
-    if (typeof data === "boolean")
-      response = await dto.updateDoneTodo(id, data);
-    else response = await dto.updateTodo(id, data);
+    const response = await dto.updateTodo(id, data);
 
     return res.json(response);
   } catch (error) {
@@ -52,15 +49,16 @@ const deleteTodo = async (req, res, next) => {
 };
 
 const getTodoById = async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const response = await dto.getTodoById(id);
-  
-      return res.json(response);
-    } catch (error) {
-      next(error);
-    }
-  };
+  try {
+    const { id } = req.params;
+
+    const response = await dto.getTodoById(id);
+
+    return res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   getTodos,

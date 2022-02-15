@@ -9,11 +9,15 @@ const createTodo = (todo) => {
 };
 
 const updateTodo = (id, data) => {
-  return todoDao.updateTodo(id, data);
-};
+  let response = "";
 
-const updateDoneTodo = (id, done) => {
-  return todoDao.updateDoneTodo(id, done);
+  if (typeof data === "boolean") {
+    response = todoDao.updateDoneTodo(id, data);
+  } else {
+    response = todoDao.updateTodo(id, data);
+  }
+
+  return response;
 };
 
 const deleteTodo = (id) => {
@@ -28,7 +32,6 @@ module.exports = {
   getTodos,
   createTodo,
   updateTodo,
-  updateDoneTodo,
   deleteTodo,
   getTodoById,
 };

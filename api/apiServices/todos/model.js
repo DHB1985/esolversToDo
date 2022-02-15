@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
-
-module.exports = (sequelize) => {
+const todoModel = (sequelize) => {
   sequelize.define("todo", {
     description: {
       type: DataTypes.STRING,
@@ -12,3 +11,5 @@ module.exports = (sequelize) => {
     },
   });
 };
+
+module.exports = todoModel

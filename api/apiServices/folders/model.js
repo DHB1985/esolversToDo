@@ -1,10 +1,12 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize) => {
-  sequelize.define("folders", {
+const folderModel = (sequelize) => {
+  sequelize.define("folder", {
     description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   });
 };
+
+module.exports = folderModel
