@@ -8,13 +8,13 @@ const createTodo = (todo) => {
   return todoDao.createTodo(todo);
 };
 
-const updateTodo = (id, data) => {
+const updateTodo = (id, info) => {
   let response = "";
 
-  if (typeof data === "boolean") {
-    response = todoDao.updateDoneTodo(id, data);
+  if (typeof info === "boolean") {
+    response = todoDao.updateDoneTodo(id, info);
   } else {
-    response = todoDao.updateTodo(id, data);
+    response = todoDao.updateTodo(id, info);
   }
 
   return response;

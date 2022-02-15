@@ -26,10 +26,9 @@ const createTodo = async (req, res, next) => {
 
 const updateTodo = async (req, res, next) => {
   try {
-    const { data } = req.body;
+    const { info } = req.body;
     const { id } = req.params;
-
-    const response = await dto.updateTodo(id, data);
+    const response = await dto.updateTodo(id, info);
 
     return res.json(response);
   } catch (error) {
