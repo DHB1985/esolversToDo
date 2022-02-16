@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postTodo } from "../../actions/actions";
+import { postTodo } from "../../actions/actionsTodo";
 
-const AddTodo = () => {
+const AddTodo = ({selectedFolder}) => {
   const dispatch = useDispatch();
 
   const [todo, setTodo] = useState("");
@@ -19,7 +19,7 @@ const AddTodo = () => {
   const handleSubmit = () => {
     if (!error && todo.length !== 0) {
       setError(false);
-      dispatch(postTodo(todo));
+      dispatch(postTodo(todo, selectedFolder));
       setTodo("");
     } else setError(true);
   };
@@ -31,8 +31,8 @@ const AddTodo = () => {
         value={todo}
         onChange={(event) => handleChange(event)}
       />
-      {error && <p>Required</p>}
       <button onClick={handleSubmit}>Add</button>
+      {error && <p>Required</p>}
     </div>
   );
 };

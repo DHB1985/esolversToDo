@@ -1,11 +1,18 @@
-const { Todo } = require("../../services/db");
+const { Todo, Folder } = require("../../services/db");
 
-const getTodos = async () => {
-  return await Todo.findAll();
+const getTodos = async (folderId) => {
+  const response = await Folder.findOne({
+    where: { id: folderId },
+    include: { model: Todo, attributes: ["id", "description", "done"] },
+  });
+  return response;
 };
 
-const createTodo = async (todo) => {
-  return await Todo.create(todo);
+const createTodo = async (todo, folderId) => {
+  const todoCreated = await Todo.create(todo);
+  const folder = await Folder.findByPk(folderId);
+  const response = await folder.addTodo(todoCreated.dataValues.id);
+  return todoCreated;
 };
 
 const updateTodo = async (id, description) => {

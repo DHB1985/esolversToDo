@@ -9,7 +9,7 @@ const {
   getTodoById,
 } = require("./controllers");
 
-router.get("/all", getTodos);
+router.get("/all/:folderId", getTodos);
 router.post("/", createTodo);
 router.put("/:id", updateTodo);
 router.delete("/:id", deleteTodo);

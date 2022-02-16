@@ -1,11 +1,16 @@
 const todoDao = require("./dao");
 
-const getTodos = () => {
-  return todoDao.getTodos();
+const getTodos = (folderId) => {
+  const response = todoDao.getTodos(folderId).then((value) =>
+    value.todos.map((element) => {
+      return { id: element.id, description: element.description, done: element.done };
+    })
+  );
+  return response;
 };
 
-const createTodo = (todo) => {
-  return todoDao.createTodo(todo);
+const createTodo = (todo, folderId) => {
+  return todoDao.createTodo(todo, folderId);
 };
 
 const updateTodo = (id, info) => {

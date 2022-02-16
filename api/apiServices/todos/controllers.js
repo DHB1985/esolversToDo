@@ -2,7 +2,8 @@ const dto = require("./dto");
 
 const getTodos = async (req, res, next) => {
   try {
-    const todos = await dto.getTodos();
+    const {folderId} = req.params
+    const todos = await dto.getTodos(folderId);
 
     return res.json(todos);
   } catch (error) {
@@ -12,11 +13,11 @@ const getTodos = async (req, res, next) => {
 
 const createTodo = async (req, res, next) => {
   try {
-    const { description } = req.body;
+    const { description, folderId } = req.body;
 
     const todo = { description: description, done: false };
 
-    const response = await dto.createTodo(todo);
+    const response = await dto.createTodo(todo, folderId);
 
     return res.json(response);
   } catch (error) {

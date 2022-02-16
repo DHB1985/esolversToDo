@@ -1,0 +1,11 @@
+.folderList {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  padding: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+button {
+  margin: 10px;
+}

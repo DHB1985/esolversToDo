@@ -24,10 +24,10 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Todo, Folders } = sequelize.models;
+const { Todo, Folder } = sequelize.models;
 
-// Todo.belongsTo(Folders, { through: "todofolders", timestamps: false });
-// Folders.belongsToMany(Todo, { through: "todofolders", timestamps: false });
+Todo.belongsTo(Folder, { through: "todofolders", timestamps: false });
+Folder.belongsToMany(Todo, { through: "todofolders", timestamps: false });
 
 module.exports = {
   ...sequelize.models,

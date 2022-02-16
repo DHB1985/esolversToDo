@@ -1,10 +1,10 @@
-import Todo from "./Components/Layout/Todo";
+import Home from "./Pages/Home";
 
 function App() {
   return (
     <div>
       <h1>Ensolvers ToDo</h1>
-      <Todo />
+    <Home/>
     </div>
   );
 }

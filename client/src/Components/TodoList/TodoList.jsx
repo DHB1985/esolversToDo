@@ -1,12 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteTodo, getTodoById, putTodo } from "../../actions/actions";
+import { deleteTodo, getTodoById, putTodo } from "../../actions/actionsTodo";
 
-const TodoList = ({ todos, setModalShow }) => {
+import styles from "./todoList.module.css";
+
+const TodoList = ({ todos, setModalShow, selectedFolder }) => {
   const dispatch = useDispatch();
 
   const handleCheckTodo = (event) => {
-    dispatch(putTodo(event.target.name, event.target.checked));
+    dispatch(putTodo(event.target.name, event.target.checked, selectedFolder));
   };
 
   const handleEdit = (event) => {
@@ -15,16 +17,15 @@ const TodoList = ({ todos, setModalShow }) => {
   };
 
   const handleDelete = (event) => {
-    dispatch(deleteTodo(event.target.value));
+    dispatch(deleteTodo(event.target.value, selectedFolder));
   };
 
   return (
     <div>
-      <h3>To Do List</h3>
       {todos &&
         todos.map((todo) => {
           return (
-            <div key={todo.id}>
+            <div key={todo.id} className={styles.todoList}>
               <input
                 type="checkbox"
                 value={todo.done}

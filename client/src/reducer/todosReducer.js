@@ -10,7 +10,7 @@ const initialState = {
   folders: [],
 };
 
-const rootReducer = (state = initialState, action) => {
+const todosReducer = (state = initialState, action) => {
   switch (action.type) {
     case GETALLTODOS:
       return { ...state, todos: action.payload };
@@ -26,4 +26,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+export default todosReducer;

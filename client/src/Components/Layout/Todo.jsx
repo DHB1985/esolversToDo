@@ -2,30 +2,41 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTodos } from "../../actions/actions";
+import { getAllTodos } from "../../actions/actionsTodo";
 import AddTodo from "../AddTodo/AddTodo";
 import EditModal from "../EditModal/EditModal";
 import TodoList from "../TodoList/TodoList";
 
-const Todo = () => {
+const Todo = ({ selectedFolder, nameFolder }) => {
   const dispatch = useDispatch();
 
-  const { todos } = useSelector((state) => state);
+  const { todos } = useSelector((state) => state.todos);
 
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllTodos());
-  }, []);
+    console.log("pase");
+    dispatch(getAllTodos(selectedFolder));
+  }, [selectedFolder]);
 
   return (
     <div>
-      <TodoList todos={todos} setModalShow={setModalShow} />
+      <h3>ToDo List</h3>
+      <h5>Folder: {nameFolder}</h5>
+      <AddTodo selectedFolder={selectedFolder} />
 
-      <AddTodo />
+      <TodoList
+        todos={todos}
+        setModalShow={setModalShow}
+        selectedFolder={selectedFolder}
+      />
 
-      {modalShow && <EditModal setModalShow={setModalShow} />}
-    
+      {modalShow && (
+        <EditModal
+          setModalShow={setModalShow}
+          selectedFolder={selectedFolder}
+        />
+      )}
     </div>
   );
 };

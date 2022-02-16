@@ -2,12 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putTodo, resetDataUpdate } from "../../actions/actions";
+import { putTodo, resetDataUpdate } from "../../actions/actionsTodo";
 
-const EditModal = ({ setModalShow }) => {
+import styles from "./editModal.module.css";
+
+const EditModal = ({ setModalShow, selectedFolder }) => {
   const dispatch = useDispatch();
 
-  const { todoEdit } = useSelector((state) => state);
+  const { todoEdit } = useSelector((state) => state.todos);
 
   const todoToEditStruct = {
     id: "",
@@ -36,7 +38,7 @@ const EditModal = ({ setModalShow }) => {
   const handleSaveChange = () => {
     if (!error && todoToEdit.description.length !== 0) {
       setError(false);
-      dispatch(putTodo(todoToEdit.id, todoToEdit.description));
+      dispatch(putTodo(todoToEdit.id, todoToEdit.description, selectedFolder));
       setModalShow(false);
       dispatch(resetDataUpdate());
     } else setError(true);
@@ -49,16 +51,18 @@ const EditModal = ({ setModalShow }) => {
   };
 
   return (
-    <div>
-      <h2>Editing task {todoEdit.description}</h2>
-      <input
-        type="text"
-        value={todoToEdit.description}
-        onChange={(event) => handleChange(event)}
-      />
-      {error && <p>Required</p>}
-      <button onClick={handleSaveChange}>Save</button>
-      <button onClick={handleCancel}>Canlcel</button>
+    <div className={styles.modal}>
+      <div className={styles.modalmain}>
+        <h2>Editing task {todoEdit.description}</h2>
+        <input
+          type="text"
+          value={todoToEdit.description}
+          onChange={(event) => handleChange(event)}
+        />
+        {error && <p>Required</p>}
+        <button onClick={handleSaveChange}>Save</button>
+        <button onClick={handleCancel}>Canlcel</button>
+      </div>
     </div>
   );
 };
